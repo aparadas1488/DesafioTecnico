@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "f9272332-76b9-4b65-9272-7e37b7f21104",
+		"name": "Desafio-falabella-ejercicio2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validamos que el status code es 200\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar la longitud dado una condición\", function () {\r",
+							"   var jsonData = JSON.parse(responseBody);  \r",
+							"      const obj = jsonData.filter(item =>  item.userId === 1)\r",
+							"       pm.expect(obj.length).to.equal(10);     \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar que se obtiene el objeto especificado\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item => item.title === 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit')[0]\r",
+							"      console.log(obj)     \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar la estructura del objeto buscado sea correcta\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item => item.id === 1)[0]\r",
+							"      console.log(obj)   \r",
+							"\r",
+							"    pm.expect(pm.response.text()).to.include(\"userId\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"title\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"body\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Guardar ID en una variable dado un criterio\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"     const obj = jsonData.filter(item => item.title === 'qui est esse')\r",
+							"     console.log('this', obj)  \r",
+							"     pm.environment.set(\"test\", obj[0].id);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validamos EndPoint incorrecto\", () => {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/{{ENDPOINTPOST}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{ENDPOINTPOST}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "COMMENTS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validamos que el status code es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar que se obtiene el objeto especificado y se muestre en Visualize\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item => item.email === 'Lew@alysha.tv')[0]\r",
+							"      console.log(obj)\r",
+							"      template = `<pre><code>{{response}}</code></pre>`;\r",
+							"      pm.visualizer.set(template, {\r",
+							"    // Pass the response body parsed as JSON as `data`\r",
+							"    response: JSON.stringify(obj)\r",
+							"});\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar que se obtiene el objeto especificado\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item =>  item.email === 'Lew@alysha.tv')[0]\r",
+							"      console.log(obj)     \r",
+							"});\r",
+							"\r",
+							"pm.test(\"validar la estructura del objeto buscado sea correcta\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item => item.name === 'id labore ex et quam laborum')[0]\r",
+							"      console.log(obj)   \r",
+							"\r",
+							"    pm.expect(pm.response.text()).to.include(\"postId\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"email\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"body\");  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validamos EndPoint incorrecto\", () => {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validamos Error del servidor\", () => {\r",
+							"   pm.response.to.have.status(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/{{ENDPOINTCOMMENTS}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{ENDPOINTCOMMENTS}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALBUMS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validamos que el status code es 200\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar la longitud dado una condición\", function () {\r",
+							"   var jsonData = JSON.parse(responseBody);  \r",
+							"      const obj = jsonData.filter(item =>  item.userId === 1)\r",
+							"       pm.expect(obj.length).to.equal(10);     \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar que se obtiene el objeto especificado\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item => item.title === 'sunt qui excepturi placeat culpa')[0]\r",
+							"      console.log(obj)     \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar la estructura del objeto buscado sea correcta\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"       const obj = jsonData.filter(item => item.id === 1)[0]\r",
+							"      console.log(obj)   \r",
+							"\r",
+							"    pm.expect(pm.response.text()).to.include(\"userId\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"title\");   \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Guardar ID en una variable dado un criterio\", () => {\r",
+							"     var jsonData = JSON.parse(responseBody);  \r",
+							"     const obj = jsonData.filter(item => item.title === 'omnis laborum odio')\r",
+							"     console.log(obj)   \r",
+							"    postman.setEnvironmentVariable(\"test\", obj[0].id);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validamos EndPoint incorrecto\", () => {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/{{ENDPOINTALBUMS}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"{{ENDPOINTALBUMS}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
